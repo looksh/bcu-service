@@ -1,6 +1,18 @@
 const express = require("express");
 const axios = require("axios");
+const fs = require("fs");
 const date = require("./date");
+const mealObj = [];
+
+function test(dayRes) {
+  const mealDay = JSON.stringify(dayRes.data.sosDepartment[0].bcMenuDate);
+  const mealWeekDay = JSON.stringify(
+    dayRes.data.sosDepartment[0].bcMenuWeekDay
+  );
+  const mealList = JSON.stringify(dayRes.data.sosDepartment[0].bcMenuMenu);
+  const mealPrice = JSON.stringify(dayRes.data.sosDepartment[0].bcMenuPrice);
+  mealObj.push({ mealDay, mealWeekDay, mealList, mealPrice });
+}
 
 const BCU_HEADER = {
   headers: {
@@ -43,17 +55,18 @@ async function main() {
     BCU_HEADER
   );
 
-  // const thuResponse = await axios.post(
-  //   "https://portal.bc.ac.kr/pltl/food/findFoodData.json",
-  //   date.thu,
-  //   BCU_HEADER
-  // );
+  /*
+  const thuResponse = await axios.post(
+    "https://portal.bc.ac.kr/pltl/food/findFoodData.json",
+    date.thu,
+    BCU_HEADER
+  );
 
-  // const friResponse = await axios.post(
-  //   "https://portal.bc.ac.kr/pltl/food/findFoodData.json",
-  //   date.fri,
-  //   BCU_HEADER
-  // );
+  const friResponse = await axios.post(
+    "https://portal.bc.ac.kr/pltl/food/findFoodData.json",
+    date.fri,
+    BCU_HEADER
+  );
 
   const mealList = JSON.stringify(monResponse.data.sosStudent1[0].bcMenuMenu);
   const mealDay = JSON.stringify(monResponse.data.foodPortletParamVO.toDay);
@@ -65,6 +78,16 @@ async function main() {
   console.log(mealList);
   console.log(mealDay2);
   console.log(mealList2);
+  */
+
+  test(monResponse);
+  test(tueResponse);
+  test(wedResponse);
+
+  // fs.writeFile("./meal.json", JSON.stringify(mealObj), (err) => {
+  //   if (err) throw err;
+  //   console.log("OK");
+  // });
 }
 
 main();
