@@ -1,6 +1,7 @@
 const express = require("express");
 const axios = require("axios");
-const mealObj = [];
+const date = require("./date");
+
 const BCU_HEADER = {
   headers: {
     Accept: "application/json, text/javascript, */*; q=0.01",
@@ -24,27 +25,46 @@ const BCU_HEADER = {
 
 async function main() {
   // HTML 로드
-  const TodayResponse = await axios.post(
+  const monResponse = await axios.post(
     "https://portal.bc.ac.kr/pltl/food/findFoodData.json",
-    "sysDate=2022.10.24(%EC%9B%94)&toDay=20221024&weekDay=1&yyyy=2022&MM=10&dd=24",
+    date.mon,
     BCU_HEADER
   );
 
-  const TomorrowResponse = await axios.post(
+  const tueResponse = await axios.post(
     "https://portal.bc.ac.kr/pltl/food/findFoodData.json",
-    "sysDate=2022.10.25(%ED%99%94)&toDay=20221025&weekDay=2&yyyy=2022&MM=10&dd=25",
+    date.tue,
     BCU_HEADER
   );
 
-  const mealList = JSON.stringify(TodayResponse.data.sosStudent1[0].bcMenuMenu);
-  const mealDay = JSON.stringify(TodayResponse.data.foodPortletParamVO.toDay);
+  const wedResponse = await axios.post(
+    "https://portal.bc.ac.kr/pltl/food/findFoodData.json",
+    date.wed,
+    BCU_HEADER
+  );
 
-  const meal = JSON.stringify(TomorrowResponse.data.sosStudent1[0].bcMenuMenu);
-  const Day = JSON.stringify(TomorrowResponse.data.foodPortletParamVO.toDay);
+  // const thuResponse = await axios.post(
+  //   "https://portal.bc.ac.kr/pltl/food/findFoodData.json",
+  //   date.thu,
+  //   BCU_HEADER
+  // );
+
+  // const friResponse = await axios.post(
+  //   "https://portal.bc.ac.kr/pltl/food/findFoodData.json",
+  //   date.fri,
+  //   BCU_HEADER
+  // );
+
+  const mealList = JSON.stringify(monResponse.data.sosStudent1[0].bcMenuMenu);
+  const mealDay = JSON.stringify(monResponse.data.foodPortletParamVO.toDay);
+
+  const mealList2 = JSON.stringify(wedResponse.data.sosStudent1[0].bcMenuMenu);
+  const mealDay2 = JSON.stringify(wedResponse.data.foodPortletParamVO.toDay);
+
   console.log(mealDay);
   console.log(mealList);
-  console.log(meal);
-  console.log(Day);
+  console.log(mealDay2);
+  console.log(mealList2);
 }
 
 main();
