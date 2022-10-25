@@ -73,61 +73,27 @@ const BCU_HEADER = {
 };
 
 async function main() {
-  // HTML 로드
   const today = await axios.post(
     "https://portal.bc.ac.kr/pltl/food/findFoodData.json",
     date.today,
     BCU_HEADER
   );
 
-  // const tueResponse = await axios.post(
-  //   "https://portal.bc.ac.kr/pltl/food/findFoodData.json",
-  //   date.tue,
-  //   BCU_HEADER
-  // );
-
-  // const wedResponse = await axios.post(
-  //   "https://portal.bc.ac.kr/pltl/food/findFoodData.json",
-  //   date.wed,
-  //   BCU_HEADER
-  // );
-
-  /*
-  const thuResponse = await axios.post(
+  const tomorrow = await axios.post(
     "https://portal.bc.ac.kr/pltl/food/findFoodData.json",
-    date.thu,
+    date.tomorrow,
     BCU_HEADER
   );
-
-  const friResponse = await axios.post(
-    "https://portal.bc.ac.kr/pltl/food/findFoodData.json",
-    date.fri,
-    BCU_HEADER
-  );
-
-  const mealList = JSON.stringify(monResponse.data.sosStudent1[0].bcMenuMenu);
-  const mealDay = JSON.stringify(monResponse.data.foodPortletParamVO.toDay);
-
-  const mealList2 = JSON.stringify(wedResponse.data.sosStudent1[0].bcMenuMenu);
-  const mealDay2 = JSON.stringify(wedResponse.data.foodPortletParamVO.toDay);
-
-  console.log(mealDay);
-  console.log(mealList);
-  console.log(mealDay2);
-  console.log(mealList2);
-  */
 
   makeMealObj(today);
   console.log(mealObj);
-  // makeMealObj(tueResponse);
-  // console.log(mealObj);
-  // makeMealObj(wedResponse);
-  // console.log(mealObj);
+  makeMealObj(tomorrow);
+  console.log(mealObj);
 
-  // fs.writeFile("./meal.json", JSON.stringify(mealObj), (err) => {
-  //   if (err) throw err;
-  //   console.log("OK");
-  // });
+  fs.writeFile("./meal.json", JSON.stringify(mealObj), (err) => {
+    if (err) throw err;
+    console.log("OK");
+  });
 }
 
 main();
