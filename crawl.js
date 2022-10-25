@@ -51,6 +51,13 @@ function makeMealObj(dayRes) {
   mealLoop(SOSA, BCU, SOSA_STAFF, BCU_STAFF);
 }
 
+function createJson(name) {
+  fs.writeFile(`./${name}.json`, JSON.stringify(mealObj), (err) => {
+    if (err) throw err;
+    console.log("OK");
+  });
+}
+
 const BCU_HEADER = {
   headers: {
     Accept: "application/json, text/javascript, */*; q=0.01",
@@ -78,22 +85,16 @@ async function main() {
     date.today,
     BCU_HEADER
   );
+  makeMealObj(today);
+  createJson("todayMeal");
 
   const tomorrow = await axios.post(
     "https://portal.bc.ac.kr/pltl/food/findFoodData.json",
     date.tomorrow,
     BCU_HEADER
   );
-
-  makeMealObj(today);
-  console.log(mealObj);
   makeMealObj(tomorrow);
-  console.log(mealObj);
-
-  fs.writeFile("./meal.json", JSON.stringify(mealObj), (err) => {
-    if (err) throw err;
-    console.log("OK");
-  });
+  createJson("tomorrowMeal");
 }
 
 main();
