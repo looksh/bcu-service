@@ -1,29 +1,26 @@
 const express = require("express");
-const fs = require("fs");
 const app = express();
-
-let meal;
-
-fs.readFile("./meal.json", "utf8", (err, data) => {
-  if (err) throw err;
-  meal = JSON.parse(data);
-});
+const apiRouter = express.Router();
 
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use("/api", apiRouter);
 
-app.post("/message", (req, res) => {
-  const day = new Date();
-  const today = day.getDay();
-  const yoil = day.toString().slice(0, 3).toUpperCase();
+apiRouter.post("/today", (req, res) => {
+  const responseBody = {
+    version: "2.0",
+    template: {
+      outputs: [
+        {
+          simpleText: {
+            text: "오늘의 식단 데이터를 출력할거야",
+          },
+        },
+      ],
+    },
+  };
 
-  const question = req.body.userRequest.utterance;
-  const goMain = "처음으로";
-  const goBack = "뒤로가기";
-  const selectDay = "요일지정";
-  let data;
-  //...
+  res.status(200).send(responseBody);
 });
 
-const day2 = new Date();
-
-console.log(day2.toString().slice(0, 3).toUpperCase());
+app.listen(3000, () => console.log("node on 3000"));
