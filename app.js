@@ -1,4 +1,7 @@
 const express = require("express");
+const fs = require("fs");
+const process = require("./process");
+const date = require("./js/date");
 const app = express();
 const apiRouter = express.Router();
 
@@ -6,20 +9,27 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use("/api", apiRouter);
 
-apiRouter.post("/today", (req, res) => {
+apiRouter.post("/todaySosa", (req, res) => {
   const responseBody = {
     version: "2.0",
-    template: {
-      outputs: [
-        {
-          simpleText: {
-            text: "오늘의 식단 데이터를 출력할거야",
-          },
-        },
-      ],
+    data: {
+      today: `${date.today}`,
+      student: `${process.sosaStudent}`,
+      staff: `${process.sosaStaff}`,
     },
   };
+  res.status(200).send(responseBody);
+});
 
+apiRouter.post("/todayBcu", (req, res) => {
+  const responseBody = {
+    version: "2.0",
+    data: {
+      today: `${date.today}`,
+      student: `${process.bcuStudent}`,
+      staff: `${process.bcuStaff}`,
+    },
+  };
   res.status(200).send(responseBody);
 });
 
