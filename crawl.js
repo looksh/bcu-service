@@ -53,7 +53,7 @@ function makeMealObj(dayRes) {
 }
 
 function createJson(name) {
-  fs.writeFile(`./${name}.json`, JSON.stringify(mealObj), (err) => {
+  fs.writeFile(`./json/${name}.json`, JSON.stringify(mealObj), (err) => {
     if (err) throw err;
     console.log("OK");
   });
@@ -98,13 +98,15 @@ async function main() {
   createJson("tomorrowMeal");
 }
 
-cron.schedule(
-  "0 0 6 * * MON-FRI'",
-  function () {
-    main();
-  },
-  {
-    scheduled: true,
-    timezone: "Asia/Seoul",
-  }
-);
+// cron.schedule(
+//   "0 0 6 * * MON-FRI'",
+//   function () {
+//     main();
+//   },
+//   {
+//     scheduled: true,
+//     timezone: "Asia/Seoul",
+//   }
+// );
+
+main();

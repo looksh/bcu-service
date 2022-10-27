@@ -1,6 +1,6 @@
 const express = require("express");
 const fs = require("fs");
-const process = require("./process");
+const process = require("./js/process");
 const date = require("./js/date");
 const app = express();
 const apiRouter = express.Router();

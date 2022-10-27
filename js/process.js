@@ -5,7 +5,7 @@ let sosaStaff = [];
 let bcuStudent = [];
 let bcuStaff = [];
 
-fs.readFile("./todayMeal.json", "utf-8", (err, data) => {
+fs.readFile("./json/todayMeal.json", "utf-8", (err, data) => {
   if (err) throw err;
   meal = JSON.parse(data);
   fuck(meal);
