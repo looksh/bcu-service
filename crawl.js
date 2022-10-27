@@ -12,27 +12,27 @@ function mealLoop(sosa, bcu, sosa_staff, bcu_staff) {
   let bcuStaffFoodList = [];
 
   for (i = 0; i < sosa.length; i++) {
-    const sosa_menu = JSON.stringify(sosa[i].bcMenuMenu);
-    const sosa_menu_price = JSON.stringify(sosa[i].bcMenuPrice);
-    sosaFoodList.push({ sosa_menu, sosa_menu_price });
+    const menu = JSON.stringify(sosa[i].bcMenuMenu);
+    const price = JSON.stringify(sosa[i].bcMenuPrice);
+    sosaFoodList.push({ menu, price });
   }
 
   for (i = 0; i < bcu.length; i++) {
-    const bcu_menu = JSON.stringify(bcu[i].bcMenuMenu);
-    const bcu_menu_price = JSON.stringify(bcu[i].bcMenuPrice);
-    bcuFoodList.push({ bcu_menu, bcu_menu_price });
+    const menu = JSON.stringify(bcu[i].bcMenuMenu);
+    const price = JSON.stringify(bcu[i].bcMenuPrice);
+    bcuFoodList.push({ menu, price });
   }
 
   for (i = 0; i < sosa_staff.length; i++) {
-    const staff_menu = JSON.stringify(sosa_staff[i].bcMenuMenu);
-    const staff_menu_price = JSON.stringify(sosa_staff[i].bcMenuPrice);
-    sosaStaffFoodList.push({ staff_menu, staff_menu_price });
+    const menu = JSON.stringify(sosa_staff[i].bcMenuMenu);
+    const price = JSON.stringify(sosa_staff[i].bcMenuPrice);
+    sosaStaffFoodList.push({ menu, price });
   }
 
   for (i = 0; i < bcu_staff.length; i++) {
-    const staff_menu = JSON.stringify(bcu_staff[i].bcMenuMenu);
-    const staff_menu_price = JSON.stringify(bcu_staff[i].bcMenuPrice);
-    bcuStaffFoodList.push({ staff_menu, staff_menu_price });
+    const menu = JSON.stringify(bcu_staff[i].bcMenuMenu);
+    const price = JSON.stringify(bcu_staff[i].bcMenuPrice);
+    bcuStaffFoodList.push({ menu, price });
   }
 
   mealObj.sosStudent = sosaFoodList;
