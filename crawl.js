@@ -2,6 +2,7 @@ const express = require("express");
 const axios = require("axios");
 const fs = require("fs");
 const date = require("./js/date");
+const cron = require("node-cron");
 const mealObj = {};
 
 function mealLoop(sosa, bcu, sosa_staff, bcu_staff) {
@@ -97,4 +98,13 @@ async function main() {
   createJson("tomorrowMeal");
 }
 
-main();
+cron.schedule(
+  "0 0 6 * * MON-FRI'",
+  function () {
+    main();
+  },
+  {
+    scheduled: true,
+    timezone: "Asia/Seoul",
+  }
+);
