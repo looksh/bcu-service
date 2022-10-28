@@ -1,40 +1,66 @@
-// 챗봇에 맞는 형식으로 2차 가공
 const fs = require("fs");
 
 let meal;
+// 오늘에 해당하는 데이터
 let sosaStudent = [];
 let sosaStaff = [];
 let bcuStudent = [];
 let bcuStaff = [];
+// 내일에 해당하는 데이터
+let sosaStudentTomo = [];
+let sosaStaffTomo = [];
+let bcuStudentTomo = [];
+let bcuStaffTomo = [];
 
-fs.readFile("./json/todayMeal.json", "utf-8", (err, data) => {
-  if (err) throw err;
-  meal = JSON.parse(data);
+function readJson(mealJson) {
+  fs.readFile(`./json/${mealJson}.json`, "utf-8", (err, data) => {
+    if (err) throw err;
+    meal = JSON.parse(data);
 
-  const SOSA_STUDENT = meal.sosStudent;
-  const SOSA_STAFF = meal.sosStaff;
-  const BCU_STUDENT = meal.bcuStudent;
-  const BCU_STAFF = meal.bcuStaff;
+    const SOSA_STUDENT = meal.sosStudent;
+    const SOSA_STAFF = meal.sosStaff;
+    const BCU_STUDENT = meal.bcuStudent;
+    const BCU_STAFF = meal.bcuStaff;
 
-  chatbotRes(SOSA_STUDENT, sosaStudent);
-  chatbotRes(SOSA_STAFF, sosaStaff);
-  chatbotRes(BCU_STUDENT, bcuStudent);
-  chatbotRes(BCU_STAFF, bcuStaff);
+    if (mealJson == "todayMeal") {
+      chatbotRes(SOSA_STUDENT, sosaStudent);
+      chatbotRes(SOSA_STAFF, sosaStaff);
+      chatbotRes(BCU_STUDENT, bcuStudent);
+      chatbotRes(BCU_STAFF, bcuStaff);
+    }
 
-  console.log(bcuStudent);
-});
+    if (mealJson == "tomorrowMeal") {
+      chatbotRes(SOSA_STUDENT, sosaStudentTomo);
+      chatbotRes(SOSA_STAFF, sosaStaffTomo);
+      chatbotRes(BCU_STUDENT, bcuStudentTomo);
+      chatbotRes(BCU_STAFF, bcuStaffTomo);
+    }
+  });
+}
 
+readJson("todayMeal");
+readJson("tomorrowMeal");
+
+// 만약에 오늘 식단이 없다면?
 function chatbotRes(path, arr) {
-  for (i = 0; i < path.length; i++) {
-    arr.push(path[i].menu);
-    arr.push(path[i].price);
-    arr.push("\n");
+  if (path.length == 0) {
+    arr.push("식단 정보가 없어요!");
+  } else {
+    for (i = 0; i < path.length; i++) {
+      arr.push(path[i].menu);
+      arr.push(path[i].price);
+      arr.push("\n");
+    }
   }
 }
 
 module.exports = {
-  sosaStudent,
-  sosaStaff,
-  bcuStudent,
-  bcuStaff,
+  todayStu: sosaStudent,
+  todayStf: sosaStaff,
+  todayBtu: bcuStudent,
+  todayBtf: bcuStaff,
+  tomoStu: sosaStudentTomo,
+  tomoStf: sosaStaffTomo,
+  tomoBtu: bcuStudentTomo,
+  tomoBtf: bcuStaffTomo,
 };

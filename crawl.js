@@ -5,35 +5,24 @@ const date = require("./js/date");
 const cron = require("node-cron");
 const mealObj = {};
 
+function helpMe(info, arr) {
+  for (i = 0; i < info.length; i++) {
+    const menu = JSON.stringify(info[i].bcMenuMenu);
+    const price = JSON.stringify(info[i].bcMenuPrice);
+    arr.push({ menu, price });
+  }
+}
+
 function mealLoop(sosa, bcu, sosa_staff, bcu_staff) {
   let sosaFoodList = [];
   let bcuFoodList = [];
   let sosaStaffFoodList = [];
   let bcuStaffFoodList = [];
 
-  for (i = 0; i < sosa.length; i++) {
-    const menu = JSON.stringify(sosa[i].bcMenuMenu);
-    const price = JSON.stringify(sosa[i].bcMenuPrice);
-    sosaFoodList.push({ menu, price });
-  }
-
-  for (i = 0; i < bcu.length; i++) {
-    const menu = JSON.stringify(bcu[i].bcMenuMenu);
-    const price = JSON.stringify(bcu[i].bcMenuPrice);
-    bcuFoodList.push({ menu, price });
-  }
-
-  for (i = 0; i < sosa_staff.length; i++) {
-    const menu = JSON.stringify(sosa_staff[i].bcMenuMenu);
-    const price = JSON.stringify(sosa_staff[i].bcMenuPrice);
-    sosaStaffFoodList.push({ menu, price });
-  }
-
-  for (i = 0; i < bcu_staff.length; i++) {
-    const menu = JSON.stringify(bcu_staff[i].bcMenuMenu);
-    const price = JSON.stringify(bcu_staff[i].bcMenuPrice);
-    bcuStaffFoodList.push({ menu, price });
-  }
+  helpMe(sosa, sosaFoodList);
+  helpMe(bcu, bcuFoodList);
+  helpMe(sosa_staff, sosaStaffFoodList);
+  helpMe(bcu_staff, bcuStaffFoodList);
 
   mealObj.sosStudent = sosaFoodList;
   mealObj.bcuStudent = bcuFoodList;
@@ -98,13 +87,14 @@ async function main() {
   createJson("tomorrowMeal");
 }
 
-cron.schedule(
-  "0 0 1 * * MON-FRI'",
-  () => {
-    main();
-  },
-  {
-    scheduled: true,
-    timezone: "Asia/Seoul",
-  }
-);
+// cron.schedule(
+//   "0 0 1 * * MON-FRI'",
+//   () => {
+//     main();
+//   },
+//   {
+//     scheduled: true,
+//     timezone: "Asia/Seoul",
+//   }
+// );
+main();

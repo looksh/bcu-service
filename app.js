@@ -14,8 +14,8 @@ apiRouter.post("/todaySosa", (req, res) => {
     version: "2.0",
     data: {
       today: `${date.onel}`,
-      student: `${process.sosaStudent}`,
-      staff: `${process.sosaStaff}`,
+      student: `${process.todayStu}`,
+      staff: `${process.todayStf}`,
     },
   };
   res.status(200).send(responseBody);
@@ -26,8 +26,32 @@ apiRouter.post("/todayBcu", (req, res) => {
     version: "2.0",
     data: {
       today: `${date.onel}`,
-      student: `${process.bcuStudent}`,
-      staff: `${process.bcuStaff}`,
+      student: `${process.todayBtu}`,
+      staff: `${process.todayBtf}`,
+    },
+  };
+  res.status(200).send(responseBody);
+});
+
+apiRouter.post("/tomorrowSosa", (req, res) => {
+  const responseBody = {
+    version: "2.0",
+    data: {
+      today: `${date.neil}`,
+      student: `${process.tomoStu}`,
+      staff: `${process.tomoStf}`,
+    },
+  };
+  res.status(200).send(responseBody);
+});
+
+apiRouter.post("/tomorrowBcu", (req, res) => {
+  const responseBody = {
+    version: "2.0",
+    data: {
+      today: `${date.neil}`,
+      student: `${process.tomoBtu}`,
+      staff: `${process.tomoBtf}`,
     },
   };
   res.status(200).send(responseBody);

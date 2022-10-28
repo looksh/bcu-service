@@ -9,7 +9,7 @@ function dateCalc(day, param) {
     return result;
   } else if (day == newDay) {
     day.setDate(day.getDate() + param);
-    let result = day.toLocaleDateString("ko-KR").replaceAll(".", "");
+    let result = day.toLocaleDateString("ko-KR");
     return result;
   } else {
     console.log("error");
@@ -18,7 +18,6 @@ function dateCalc(day, param) {
 
 const onel = `${dateCalc(newDay, 0)}`;
 const neil = `${dateCalc(newDay, 1)}`;
-
 const TODAY = `toDay=${dateCalc(KMTday, 0)}`;
 const TOMORROW = `&toDay=${dateCalc(KMTday, 1)}`;
 
@@ -31,6 +30,3 @@ module.exports = {
 };
 
 console.log(onel);
-console.log(neil);
-console.log(TODAY);
-console.log(TOMORROW);
