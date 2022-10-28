@@ -13,7 +13,7 @@ apiRouter.post("/todaySosa", (req, res) => {
   const responseBody = {
     version: "2.0",
     data: {
-      today: `${date.today}`,
+      today: `${date.onel}`,
       student: `${process.sosaStudent}`,
       staff: `${process.sosaStaff}`,
     },
@@ -25,7 +25,7 @@ apiRouter.post("/todayBcu", (req, res) => {
   const responseBody = {
     version: "2.0",
     data: {
-      today: `${date.today}`,
+      today: `${date.onel}`,
       student: `${process.bcuStudent}`,
       staff: `${process.bcuStaff}`,
     },
