@@ -87,13 +87,4 @@ async function main() {
   createJson("tomorrowMeal");
 }
 
-cron.schedule(
-  "0 0 1 * * MON-FRI'",
-  () => {
-    main();
-  },
-  {
-    scheduled: true,
-    timezone: "Asia/Seoul",
-  }
-);
+main();
