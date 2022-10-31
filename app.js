@@ -2,14 +2,17 @@ const express = require("express");
 const fs = require("fs");
 const process = require("./process");
 const date = require("./js/date");
+
 const app = express();
-const apiRouter = express.Router();
+const mealRouter = express.Router();
+const noticeRouter = express.Router();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use("/api", apiRouter);
+app.use("/meal", mealRouter);
+app.use("/notice", noticeRouter);
 
-apiRouter.post("/todaySosa", (req, res) => {
+mealRouter.post("/today-sosa", (req, res) => {
   const responseBody = {
     version: "2.0",
     data: {
@@ -21,7 +24,7 @@ apiRouter.post("/todaySosa", (req, res) => {
   res.status(200).send(responseBody);
 });
 
-apiRouter.post("/todayBcu", (req, res) => {
+mealRouter.post("/today-bcu", (req, res) => {
   const responseBody = {
     version: "2.0",
     data: {
@@ -33,7 +36,7 @@ apiRouter.post("/todayBcu", (req, res) => {
   res.status(200).send(responseBody);
 });
 
-apiRouter.post("/tomorrowSosa", (req, res) => {
+mealRouter.post("/tomorrow-sosa", (req, res) => {
   const responseBody = {
     version: "2.0",
     data: {
@@ -45,7 +48,7 @@ apiRouter.post("/tomorrowSosa", (req, res) => {
   res.status(200).send(responseBody);
 });
 
-apiRouter.post("/tomorrowBcu", (req, res) => {
+mealRouter.post("/tomorrow-bcu", (req, res) => {
   const responseBody = {
     version: "2.0",
     data: {
@@ -57,7 +60,7 @@ apiRouter.post("/tomorrowBcu", (req, res) => {
   res.status(200).send(responseBody);
 });
 
-apiRouter.post("/notice", (req, res) => {
+noticeRouter.post("/", (req, res) => {
   const responseBody = {
     version: "2.0",
     template: {
