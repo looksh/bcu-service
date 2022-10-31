@@ -2,6 +2,7 @@ const express = require("express");
 const fs = require("fs");
 const process = require("./process");
 const date = require("./js/date");
+const notice = require("./crawlNotice");
 
 const app = express();
 const mealRouter = express.Router();
@@ -71,24 +72,43 @@ noticeRouter.post("/", (req, res) => {
             items: [
               {
                 header: {
-                  title: "학사공지",
+                  title: "일반공지",
                 },
                 items: [
                   {
-                    title: "2022학년도 2학기 중간 강의평가 실시 안내",
-                    description: "2022. 10. 04",
+                    title: `${notice.ilbanPost[0].title}`,
+                    description: `${notice.ilbanPost[0].date}`,
+                    link: {
+                      web: `https://www.bc.ac.kr/bcu/pr/notice01.do${notice.ilbanPost[0].url}`,
+                    },
                   },
                   {
-                    title: "제11호 태풍 힌남노 영향에 따른 수업 운영 안내 ",
-                    description: "2022. 09. 05",
+                    title: `${notice.ilbanPost[1].title}`,
+                    description: `${notice.ilbanPost[1].date}`,
+                    link: {
+                      web: `https://www.bc.ac.kr/bcu/pr/notice01.do${notice.ilbanPost[1].url}`,
+                    },
                   },
                   {
-                    title: "에그 포테이토",
-                    description: "5,300원",
+                    title: `${notice.ilbanPost[2].title}`,
+                    description: `${notice.ilbanPost[2].date}`,
+                    link: {
+                      web: `https://www.bc.ac.kr/bcu/pr/notice01.do${notice.ilbanPost[2].url}`,
+                    },
                   },
                   {
-                    title: "갈릭 베이컨 토마토",
-                    description: "5,800원",
+                    title: `${notice.ilbanPost[3].title}`,
+                    description: `${notice.ilbanPost[3].date}`,
+                    link: {
+                      web: `https://www.bc.ac.kr/bcu/pr/notice01.do${notice.ilbanPost[3].url}`,
+                    },
+                  },
+                  {
+                    title: `${notice.ilbanPost[4].title}`,
+                    description: `${notice.ilbanPost[4].date}`,
+                    link: {
+                      web: `https://www.bc.ac.kr/bcu/pr/notice01.do${notice.ilbanPost[4].url}`,
+                    },
                   },
                 ],
               },
@@ -98,20 +118,81 @@ noticeRouter.post("/", (req, res) => {
                 },
                 items: [
                   {
-                    title: "아메리카노",
-                    description: "1,800원",
+                    title: `${notice.janghakPost[0].title}`,
+                    description: `${notice.janghakPost[0].date}`,
+                    link: {
+                      web: `https://www.bc.ac.kr/bcu/pr/notice03.do${notice.janghakPost[0].url}`,
+                    },
                   },
                   {
-                    title: "카페라떼",
-                    description: "2,000원",
+                    title: `${notice.janghakPost[1].title}`,
+                    description: `${notice.janghakPost[1].date}`,
+                    link: {
+                      web: `https://www.bc.ac.kr/bcu/pr/notice03.do${notice.janghakPost[1].url}`,
+                    },
                   },
                   {
-                    title: "카페모카",
-                    description: "2,500원",
+                    title: `${notice.janghakPost[2].title}`,
+                    description: `${notice.janghakPost[2].date}`,
+                    link: {
+                      web: `https://www.bc.ac.kr/bcu/pr/notice03.do${notice.janghakPost[2].url}`,
+                    },
                   },
                   {
-                    title: "소이라떼",
-                    description: "2,200원",
+                    title: `${notice.janghakPost[3].title}`,
+                    description: `${notice.janghakPost[3].date}`,
+                    link: {
+                      web: `https://www.bc.ac.kr/bcu/pr/notice03.do${notice.janghakPost[3].url}`,
+                    },
+                  },
+                  {
+                    title: `${notice.janghakPost[4].title}`,
+                    description: `${notice.janghakPost[4].date}`,
+                    link: {
+                      web: `https://www.bc.ac.kr/bcu/pr/notice03.do${notice.janghakPost[4].url}`,
+                    },
+                  },
+                ],
+              },
+              {
+                header: {
+                  title: "학사공지",
+                },
+                items: [
+                  {
+                    title: `${notice.haksaPost[0].title}`,
+                    description: `${notice.haksaPost[0].date}`,
+                    link: {
+                      web: `https://www.bc.ac.kr/bcu/pr/notice02.do${notice.haksaPost[0].url}`,
+                    },
+                  },
+                  {
+                    title: `${notice.haksaPost[1].title}`,
+                    description: `${notice.haksaPost[1].date}`,
+                    link: {
+                      web: `https://www.bc.ac.kr/bcu/pr/notice02.do${notice.haksaPost[1].url}`,
+                    },
+                  },
+                  {
+                    title: `${notice.haksaPost[2].title}`,
+                    description: `${notice.haksaPost[2].date}`,
+                    link: {
+                      web: `https://www.bc.ac.kr/bcu/pr/notice02.do${notice.haksaPost[2].url}`,
+                    },
+                  },
+                  {
+                    title: `${notice.haksaPost[3].title}`,
+                    description: `${notice.haksaPost[3].date}`,
+                    link: {
+                      web: `https://www.bc.ac.kr/bcu/pr/notice02.do${notice.haksaPost[3].url}`,
+                    },
+                  },
+                  {
+                    title: `${notice.haksaPost[4].title}`,
+                    description: `${notice.haksaPost[4].date}`,
+                    link: {
+                      web: `https://www.bc.ac.kr/bcu/pr/notice02.do${notice.haksaPost[4].url}`,
+                    },
                   },
                 ],
               },
