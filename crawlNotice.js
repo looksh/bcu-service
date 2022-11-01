@@ -33,7 +33,7 @@ function makeNoticeArr(info, arr) {
     }
   });
   arr.length = 5;
-  console.log(arr);
+  console.log("ok");
 }
 
 async function notice() {

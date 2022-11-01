@@ -4,14 +4,16 @@ const fs = require("fs");
 const date = require("./js/date");
 const mealObj = {};
 
+// 객체를 생성하고 배열에 넣는 함수
 function helpMe(info, arr) {
   for (i = 0; i < info.length; i++) {
-    const menu = JSON.stringify(info[i].bcMenuMenu);
-    const price = JSON.stringify(info[i].bcMenuPrice);
+    const menu = info[i].bcMenuMenu;
+    const price = info[i].bcMenuPrice;
     arr.push({ menu, price });
   }
 }
 
+// 데이터를 가공하는 함수
 function mealLoop(sosa, bcu, sosa_staff, bcu_staff) {
   let sosaFoodList = [];
   let bcuFoodList = [];
@@ -23,12 +25,14 @@ function mealLoop(sosa, bcu, sosa_staff, bcu_staff) {
   helpMe(sosa_staff, sosaStaffFoodList);
   helpMe(bcu_staff, bcuStaffFoodList);
 
+  // mealObj 의 key 와 value 를 설정하는 코드
   mealObj.sosStudent = sosaFoodList;
   mealObj.bcuStudent = bcuFoodList;
   mealObj.sosStaff = sosaStaffFoodList;
   mealObj.bcuStaff = bcuStaffFoodList;
 }
 
+// axios 에서 파싱된 주소를 받아서 목적에 맞는 변수로 나눠줌
 function makeMealObj(dayRes) {
   const SOSA = dayRes.data.sosStudent1;
   const BCU = dayRes.data.bcuStudent;

@@ -12,6 +12,7 @@ let sosaStaffTomo = [];
 let bcuStudentTomo = [];
 let bcuStaffTomo = [];
 
+// 가공된 데이터 읽어오는 함수
 function readJson(mealJson) {
   fs.readFile(`./json/${mealJson}.json`, "utf-8", (err, data) => {
     if (err) throw err;
@@ -22,6 +23,7 @@ function readJson(mealJson) {
     const BCU_STUDENT = meal.bcuStudent;
     const BCU_STAFF = meal.bcuStaff;
 
+    // 각각의 배열에 데이터를 저장.
     if (mealJson == "todayMeal") {
       chatbotRes(SOSA_STUDENT, sosaStudent);
       chatbotRes(SOSA_STAFF, sosaStaff);
